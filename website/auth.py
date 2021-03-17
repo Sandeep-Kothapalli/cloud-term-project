@@ -1,22 +1,30 @@
-from flask import Blueprint, render_template
-from flask.helpers import send_file
-from flask.signals import template_rendered
-from jinja2 import Template
-
+from flask import Blueprint, render_template, request
+from pprint import pprint
 auth = Blueprint('auth', __name__)
 
 
-@auth.route('/login')
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        content = request.form
+        # keys are the "name"s of the form html items
+        # values are the values the users have entered
+        pprint(content.to_dict(flat=False))
     return render_template("login.html")
+
 
 @auth.route('/logout')
 def logout():
     return render_template("logout.html")
 
 
-@auth.route('/signup')
+@auth.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if request.method == 'POST':
+        content = request.form
+        # keys are the "name"s of the form html items
+        # values are the values the users have entered
+        pprint(content.to_dict(flat=False))
     return render_template("signup.html")
 
 

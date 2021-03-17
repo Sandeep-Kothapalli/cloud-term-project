@@ -1,39 +1,40 @@
-{% extends "base.html" %} {% block title %} Login page {% endblock %} {% block
-content %}
-<body>
+{% extends "base.html" %} {% block title %} Login page {% endblock %} {% block content %}
   <h1 class="text-center">Login</h1>
-  <form>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
+  <p></p>
+  <p></p>
+  <form  method="POST" class="row g-3">
+    <!-- email id -->
+    <div class="col-md-7">
+      <label for="inputEmail" class="form-label">Email address</label>
       <input
         type="email"
         class="form-control"
-        id="exampleInputEmail1"
+        id="inputEmail"
+        name="inputEmail"
         aria-describedby="emailHelp"
       />
       <div id="emailHelp" class="form-text">
         We never share your email with anyone else.
       </div>
     </div>
-
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
+    <!-- password -->
+    <div class="col-md-7">
+      <label for="inputPassword" class="form-label">Password</label>
       <input
         type="password"
         class="form-control"
-        id="exampleInputPassword1"
-        aria-describedby="passwordHelper"
+        id="inputPassword"
+        name="inputPassword"
       />
-      <div class="form-text" id="passwordHelper">
-        Your password must be 8-20 characters long, contain letters and numbers,
-        and must not contain spaces, special characters, or emoji.
-      </div>
     </div>
-    <!-- <div class="mb-3 form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div> -->
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <!-- submit button -->
+    <button type="submit" class="btn btn-primary col-md-7">Login</button>
+    <!-- redirect to signup -->
+    <div class="form-text text-left">
+      Dont have an account?
+      <p>
+        <a href="/signup" id="signup">Sign Up here!</a>
+      </p>
+    </div>
   </form>
-</body>
 {% endblock %}

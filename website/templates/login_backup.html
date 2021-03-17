@@ -1,41 +1,45 @@
-{% extends "base.html" %}
-{% block title %} Login page {% endblock %}
-{% block content %}
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5 mx-auto">
-                    <div id="login_form">
-                        <div class="myform form ">
-                            <div class="logo mb-3">
-                                <div class="col-md-12 text-center">
-                                    <h1>Login</h1>
-                                </div>
-                            </div>
-                            <form action="" method="post" name="login">
-                                <!-- email address  -->
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email"  name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-                                </div>
-                                <!-- password -->
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Password</label>
-                                    <input type="password" name="password" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Enter Password">
-                                </div>
-                                <!-- login button -->
-                                <div class="col-md-12 text-center ">
-                                    <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
-                                </div>
-                                <!-- redirect to signup -->
-                                <div class="form-group">
-                                    <p class="text-center">Don't have account? <a href="/signup" id="signup">Sign up here</a></p>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
+{% extends "base.html" %} {% block title %} Login page {% endblock %} {% block content %}
+  <h1 class="text-center">Login</h1>
+  <p></p>
+  <p></p>
+  <form  method="POST" class="row g-3">
+    <!-- email id -->
+    <div class="col-md-7">
+      <label for="inputEmail" class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="inputEmail"
+        name="inputEmail"
+        aria-describedby="emailHelp"
+      />
+      <div id="emailHelp" class="form-text">
+        We never share your email with anyone else.
+      </div>
+    </div>
+    <!-- password -->
+    <div class="col-md-7">
+      <label for="inputPassword" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="inputPassword"
+        name="inputPassword"
+        aria-describedby="passwordHelper"
+      />
+      <div class="form-text" id="passwordHelper">
+        Your password must be 8-20 characters long, contain letters and numbers,
+        and must not contain spaces, special characters, or emoji.
+      </div>
+    </div>
+    <!-- submit button -->
+    <button type="submit" class="btn btn-primary col-md-7">Login</button>
+    <!-- redirect to signup -->
+    <div class="form-text text-left">
+      Dont have an account?
+      <p>
+        <a href="/signup" id="signup">Sign Up here!</a>
+      </p>
+    </div>
+  </form>
 {% endblock %}
