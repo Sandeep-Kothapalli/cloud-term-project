@@ -22,6 +22,7 @@ class hData(db.Model):
     
 
     def __repr__(self):
+        pass
         
 
 #add user class for user database
