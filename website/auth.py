@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, flash
 from pprint import pprint
+
 auth = Blueprint('auth', __name__)
 
 
@@ -7,8 +8,7 @@ auth = Blueprint('auth', __name__)
 def login():
     if request.method == 'POST':
         content = request.form
-        # keys are the "name"s of the form html items
-        # values are the values the users have entered
+        #name of the form elements
         pprint(content.to_dict(flat=False))
     return render_template("login.html")
 
@@ -22,8 +22,6 @@ def logout():
 def signup():
     if request.method == 'POST':
         content = request.form
-        # keys are the "name"s of the form html items
-        # values are the values the users have entered
         pprint(content.to_dict(flat=False))
     return render_template("signup.html")
 

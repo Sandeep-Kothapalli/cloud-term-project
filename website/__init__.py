@@ -11,7 +11,7 @@ def create_app():
     # app.config.from_object(os.environ['APP_SETTINGS'])
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql:///{DB_NAME}'
-
+    
     from .views import views
     from .auth import auth
 

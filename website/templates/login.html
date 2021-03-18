@@ -1,40 +1,44 @@
 {% extends "base.html" %} {% block title %} Login page {% endblock %} {% block content %}
-  <h1 class="text-center">Login</h1>
-  <p></p>
-  <p></p>
-  <form  method="POST" class="row g-3">
+<h1 class="text-center">Login</h1>
+<p></p>
+<p></p>
+<form  method="POST" class="row g-3">
+
     <!-- email id -->
     <div class="col-md-7">
-      <label for="inputEmail" class="form-label">Email address</label>
-      <input
-        type="email"
-        class="form-control"
-        id="inputEmail"
-        name="inputEmail"
-        aria-describedby="emailHelp"
-      />
-      <div id="emailHelp" class="form-text">
-        We never share your email with anyone else.
-      </div>
+        <label for="inputEmail" class="form-label">Email address</label>
+        <input
+            type="email"
+            class="form-control"
+            id="inputEmail"
+            name="inputEmail"
+            aria-describedby="emailHelp"
+            />
+        <div id="emailHelp" class="form-text">
+            We never share your email with anyone else.
+        </div>
     </div>
+
     <!-- password -->
     <div class="col-md-7">
-      <label for="inputPassword" class="form-label">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        id="inputPassword"
-        name="inputPassword"
-      />
+        <label for="inputPassword" class="form-label">Password</label>
+        <input
+            type="password"
+            class="form-control"
+            id="inputPassword"
+            name="inputPassword"
+            />
     </div>
+
     <!-- submit button -->
     <button type="submit" class="btn btn-primary col-md-7">Login</button>
+
     <!-- redirect to signup -->
     <div class="form-text text-left">
-      Dont have an account?
-      <p>
-        <a href="/signup" id="signup">Sign Up here!</a>
-      </p>
+        Dont have an account?
+        <p>
+            <a href="/signup" id="signup">Sign Up here!</a>
+        </p>
     </div>
-  </form>
+</form>
 {% endblock %}
