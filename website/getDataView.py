@@ -23,4 +23,3 @@ def getData():
             # flash('row added!', category='success')
 
     return render_template("getData.html", user=current_user)
-

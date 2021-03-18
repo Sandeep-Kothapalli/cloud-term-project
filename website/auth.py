@@ -12,6 +12,15 @@ def login():
         pprint(content.to_dict(flat=False))
     return render_template("login.html")
 
+@auth.route('/getData', methods=['GET', 'POST'])
+def getData():
+    if request.method == 'POST':
+        content = request.form
+        # keys are the "name"s of the form html items
+        # values are the values the users have entered
+        pprint(content.to_dict(flat=False))
+    return render_template("getData.html")
+
 
 @auth.route('/logout')
 def logout():
