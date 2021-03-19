@@ -9,7 +9,8 @@ auth = Blueprint('auth', __name__)
 def login():
     if request.method == 'POST':
         content = request.form
-        #name of the form elements
+        # keys are the "name"s of the form html items
+        # values are the values the users have entered
         pprint(content.to_dict(flat=False))
         return render_template("welcome.html")
     else:

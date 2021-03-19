@@ -4,7 +4,6 @@ from .models import hData
 from . import db
 import json
 
-        #name of the form elements
 views = Blueprint('views', __name__)
 
 
