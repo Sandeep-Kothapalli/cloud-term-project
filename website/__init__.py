@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 
+        #name of the form elements
 db = SQLAlchemy()
 DB_NAME = "database"
 

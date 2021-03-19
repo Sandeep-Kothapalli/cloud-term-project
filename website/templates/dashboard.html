@@ -12,14 +12,11 @@
 
 <script>
     var hb = {{ data.hb | safe }};
-
     var bp = {{ data.bp | safe }};
-
     var sp = {{ data.sp | safe }};
-
     var cal = {{ data.calories | safe }};
-    
-    window.onload = function () {
+
+window.onload = function () {
 
     var chart1 = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
@@ -29,7 +26,7 @@
         },
         data: [{        
             type: "line",
-              indexLabelFontSize: 16,
+            indexLabelFontSize: 16,
             dataPoints: hb
         }]
     });
@@ -43,7 +40,7 @@
         },
         data: [{        
             type: "line",
-              indexLabelFontSize: 16,
+            indexLabelFontSize: 16,
             dataPoints: bp
         }]
     });
@@ -57,7 +54,7 @@
         },
         data: [{        
             type: "line",
-              indexLabelFontSize: 16,
+            indexLabelFontSize: 16,
             dataPoints: sp
         }]
     });
@@ -71,22 +68,22 @@
         },
         data: [{        
             type: "line",
-              indexLabelFontSize: 16,
+            indexLabelFontSize: 16,
             dataPoints: cal
         }]
     });
     chart4.render();
 
-    }
+}
 </script>
 
 <body>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-<div id="chartContainer2" style="height: 370px; width: 100%;"></div>
-<div id="chartContainer3" style="height: 370px; width: 100%;"></div>
-<div id="chartContainer4" style="height: 370px; width: 100%;"></div>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
+    <div id="chartContainer3" style="height: 370px; width: 100%;"></div>
+    <div id="chartContainer4" style="height: 370px; width: 100%;"></div>
 
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 
 {% endblock %}
