@@ -27,7 +27,7 @@ def getData():
 
 @auth.route('/logout')
 def logout():
-    return render_template("logout.html")
+    return render_template("homepage.html")
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
