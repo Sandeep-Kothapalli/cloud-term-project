@@ -3,4 +3,26 @@
 <p></p>
 <p></p>
 
+<h3 class="text-left">Name : {{user.first_name}}</h3>
+<h3 class="text-left">User Email : {{user.email}}</h3>
+<h3 class="text-left">UserId : {{user.id}}</h3>
+<br>
+<h3 class="text-left">The following data has been collected in {{printstr}}:</h3>
+<br>
+<h3 class="text-left">Minimum Heart Rate : {{max_hb}}</h3>
+<h3 class="text-left">Maximum Heart Rate : {{min_hb}}</h3>
+<h3 class="text-left">Average Heart Rate : {{avg_hb}}</h3>
+<h3 class="text-left">Variance of Heart Rate: {{hrv}}</h3>
+<br>
+<h3 class="text-left">Minimum Blood Pressure : {{max_bp}}</h3>
+<h3 class="text-left">Maximum Blood Pressure : {{min_bp}}</h3>
+<h3 class="text-left">Average Blood Pressure : {{avg_bp}}</h3>
+<br>
+<h3 class="text-left">Minimum SPO2 : {{max_sp}}</h3>
+<h3 class="text-left">Maximum SPO2 : {{min_sp}}</h3>
+<h3 class="text-left">Average SPO2 : {{avg_sp}}</h3>
+<br>
+<h3 class="text-left">Minimum Calorie Rate : {{max_cal}}</h3>
+<h3 class="text-left">Maximum Calorie Rate : {{min_cal}}</h3>
+<h3 class="text-left">Average Calorie Rate : {{avg_cal}}</h3>
 {% endblock %}

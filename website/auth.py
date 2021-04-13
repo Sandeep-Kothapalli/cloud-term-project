@@ -6,6 +6,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 import random
 from pprint import pprint
 from datetime import datetime
+import math
 
 auth = Blueprint("auth", __name__)
 
@@ -119,7 +120,40 @@ def welcome():
 @auth.route("/metrics")
 @login_required
 def metrics():
-    return render_template("metrics.html", user=current_user)
+    a = hData.query.filter_by(userId=current_user.id).all()
+    if len(a)==0:
+        flash("No data collected, please run getData", category="error")
+        return getData()
+    a.reverse()
+    hb = []
+    bp = []
+    sp = []
+    cal = []
+
+    i=0
+    for x in a:
+        i+=1
+        hb.append(x.hr)
+        bp.append(x.bp)
+        sp.append(x.spo2)
+        cal.append(x.cal)
+        if i==5:
+            mode = x.mode
+        if i>9:
+            break
+    if mode==1:
+        printstr = "Sleep Mode"
+    else:
+        printstr = "Excercise Mode"
+    hrv = 0
+    for i in range(8):
+        hrv+=(hb[i+1]-hb[i])*(hb[i+1]-hb[i])
+    hrv=hrv/8
+    hrv = math.sqrt(hrv)
+    return render_template("metrics.html", user=current_user, printstr = printstr, hrv = hrv, max_hb = max(hb), min_hb = min(hb), avg_hb = sum(hb)/len(hb),
+        max_bp = max(bp), min_bp = min(bp), avg_bp = sum(bp)/len(bp), max_sp = max(sp), min_sp = min(sp), avg_sp = sum(sp)/len(sp),
+        max_cal = max(cal), min_cal = min(cal), avg_cal = sum(cal)/len(cal)
+    )
 
 
 @auth.route("/dashboard")
@@ -151,11 +185,11 @@ def dashboard():
     
     for i in range(9):
         dataset["hb"].append({"x": time_list[i], "y": list_10[i].hr})
-    for i in range(10):
+    for i in range(9):
         dataset["bp"].append({"x": time_list[i], "y": list_10[i].bp})
-    for i in range(10):
+    for i in range(9):
         dataset["sp"].append({"x": time_list[i], "y": list_10[i].spo2})
-    for i in range(10):
+    for i in range(9):
         dataset["calories"].append({"x": time_list[i], "y": list_10[i].cal})
     mode = list_10[5].mode
     if mode==1:
