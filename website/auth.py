@@ -63,7 +63,9 @@ def getData():
 
 
 @auth.route("/logout")
+@login_required
 def logout():
+    logout_user()
     return render_template("homepage.html")
 
 
@@ -99,7 +101,6 @@ def signup():
             )
             db.session.add(new_user)
             db.session.commit()
-            login_user(new_user, remember=True)
             flash("Account created!", category="success")
             return redirect(url_for("views.home_page"))
         # flash("Account Created!", category="success")
@@ -109,16 +110,19 @@ def signup():
 
 
 @auth.route("/welcome")
+@login_required
 def welcome():
     return render_template("welcome.html")
 
 
 @auth.route("/metrics")
+@login_required
 def metrics():
     return render_template("metrics.html")
 
 
 @auth.route("/dashboard")
+@login_required
 def dashboard():
 
     dataset = dict()
