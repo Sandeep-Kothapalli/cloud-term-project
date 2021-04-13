@@ -16,14 +16,16 @@ class hData(db.Model):
     spo2 = db.Column(db.Integer)
     bp = db.Column(db.Integer)
     cal = db.Column(db.Integer)
+    mode = db.Column(db.Integer)
 
-    def __init__(self, date, userId, hr, spo2, bp, cal):
+    def __init__(self, date, userId, hr, spo2, bp, cal, mode):
         self.date = date
         self.userId = userId
         self.hr = hr
         self.spo2 = spo2
         self.bp = bp
         self.cal = cal
+        self.mode = mode
 
     def __repr__(self):
         pass

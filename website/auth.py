@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .models import User, hData
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 import random
 from pprint import pprint
+from datetime import datetime
 
 auth = Blueprint("auth", __name__)
 
@@ -42,9 +43,22 @@ def login():
 def getData():
     if request.method == "POST":
         content = request.form
-        # keys are the "name"s of the form html items
-        # values are the values the users have entered
-        pprint(content.to_dict(flat=False))
+        # # keys are the "name"s of the form html items
+        # # values are the values the users have entered
+        # pprint(content.to_dict(flat=False))
+        if content['action']=="Sleep":
+            for i in range(100):
+                print("Zzz..")
+                dat = hData(date = datetime.today(), userId = 1, hr = random.randint(40, 50), spo2 = random.randint(90, 97), bp = random.randint(110,140), cal = random.randint(2,3), mode = 1)
+                db.session.add(dat)
+                db.session.commit()
+        if content['action']=="Exercise":
+            for i in range(100):
+                print("Vroom")
+                dat = hData(date = datetime.today(), userId = 2, hr = random.randint(120, 150), spo2 = random.randint(95, 100), bp = random.randint(130,170), cal = random.randint(10,20), mode = 2)
+                db.session.add(dat)
+                db.session.commit()
+        # a = h.
     return render_template("getData.html")
 
 
