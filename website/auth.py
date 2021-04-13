@@ -50,13 +50,13 @@ def getData():
         if content['action']=="Sleep":
             for i in range(10):
                 print("Zzz..")
-                dat = hData(date = datetime.today(), userId = current_user.id, hr = random.randint(40, 50), spo2 = random.randint(90, 97), bp = random.randint(110,140), cal = random.randint(2,3), mode = 1)
+                dat = hData(date = datetime.today(), userId = current_user.id, hr = random.randint(40, 50), spo2 = random.randint(90, 97), bp = random.randint(110,140), cal = random.randint(20,30)/10, mode = 1)
                 db.session.add(dat)
                 db.session.commit()
         if content['action']=="Exercise":
             for i in range(10):
                 print("Vroom")
-                dat = hData(date = datetime.today(), userId = current_user.id, hr = random.randint(120, 150), spo2 = random.randint(95, 100), bp = random.randint(130,170), cal = random.randint(10,20), mode = 2)
+                dat = hData(date = datetime.today(), userId = current_user.id, hr = random.randint(120, 150), spo2 = random.randint(95, 100), bp = random.randint(130,170), cal = random.randint(50,60)/10, mode = 2)
                 db.session.add(dat)
                 db.session.commit()
         return dashboard()
@@ -125,22 +125,41 @@ def metrics():
 @auth.route("/dashboard")
 @login_required
 def dashboard():
+    a = hData.query.filter_by(userId=current_user.id).all()
+    if len(a)==0:
+        flash("No data collected, please run getData", category="error")
+        return getData()
+
+    a.reverse()
+    list_10 = []
+    time_list = []
+    i=0
+    for x in a:
+        i+=1
+        list_10.append(x)
+        time_list.append(int(abs(x.date.microsecond)/1000))
+        if i>9:
+            break
+    time_list.sort()
+    list_10.reverse()
 
     dataset = dict()
     vals = ["hb", "bp", "sp", "calories"]
-
+    
     for measure in vals:
         dataset[measure] = []
-        x = []
-        y = []
-        for i in range(10):
-            tx = random.randint(0, 100) / 10
-            ty = random.randint(900, 1000) / 10
-            x.append(tx)
-            y.append(ty)
-        x.sort()
-
-        for i in range(10):
-            dataset[measure].append({"x": x[i], "y": y[i]})
-
-    return render_template("dashboard.html", data=dataset, user=current_user)
+    
+    for i in range(9):
+        dataset["hb"].append({"x": time_list[i], "y": list_10[i].hr})
+    for i in range(10):
+        dataset["bp"].append({"x": time_list[i], "y": list_10[i].bp})
+    for i in range(10):
+        dataset["sp"].append({"x": time_list[i], "y": list_10[i].spo2})
+    for i in range(10):
+        dataset["calories"].append({"x": time_list[i], "y": list_10[i].cal})
+    mode = list_10[5].mode
+    if mode==1:
+        printstr = "Sleep Mode"
+    else:
+        printstr = "Excercise Mode"
+    return render_template("dashboard.html", data=dataset, user=current_user, printstr=printstr)

@@ -3,13 +3,12 @@
 <p></p>
 <p></p>
 
-<h3 class="text-left">Name : Robin Babu P</h3>
-<h3 class="text-left">Age  : 22 </h3>
-<h3 class="text-left">Height : 163cm </h3>
-<h3 class="text-left">Weight : 69 Kg </h3>
-<h3 class="text-left">Contact Information  : 1234567890 </h3>
-<h3 class="text-left">BMI  : 26.2    </h3>
-
+<h3 class="text-left">Name : {{user.first_name}}</h3>
+<h3 class="text-left">User Email : {{user.email}}</h3>
+<h3 class="text-left">UserId : {{user.id}}</h3>
+<br>
+<h3 class="text-left">The following data has been collected in {{printstr}}:</h3>
+<br>
 <script>
     var hb = {{ data.hb | safe }};
     var bp = {{ data.bp | safe }};
