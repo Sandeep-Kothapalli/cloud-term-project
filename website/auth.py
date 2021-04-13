@@ -47,18 +47,18 @@ def getData():
         # # values are the values the users have entered
         # pprint(content.to_dict(flat=False))
         if content['action']=="Sleep":
-            for i in range(100):
+            for i in range(10):
                 print("Zzz..")
                 dat = hData(date = datetime.today(), userId = 1, hr = random.randint(40, 50), spo2 = random.randint(90, 97), bp = random.randint(110,140), cal = random.randint(2,3), mode = 1)
                 db.session.add(dat)
                 db.session.commit()
         if content['action']=="Exercise":
-            for i in range(100):
+            for i in range(10):
                 print("Vroom")
                 dat = hData(date = datetime.today(), userId = 2, hr = random.randint(120, 150), spo2 = random.randint(95, 100), bp = random.randint(130,170), cal = random.randint(10,20), mode = 2)
                 db.session.add(dat)
                 db.session.commit()
-        # a = h.
+        return dashboard()
     return render_template("getData.html")
 
 
