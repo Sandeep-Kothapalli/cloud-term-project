@@ -40,6 +40,7 @@ def login():
 
 
 @auth.route("/getData", methods=["GET", "POST"])
+@login_required
 def getData():
     if request.method == "POST":
         content = request.form
@@ -49,13 +50,13 @@ def getData():
         if content['action']=="Sleep":
             for i in range(10):
                 print("Zzz..")
-                dat = hData(date = datetime.today(), userId = 1, hr = random.randint(40, 50), spo2 = random.randint(90, 97), bp = random.randint(110,140), cal = random.randint(2,3), mode = 1)
+                dat = hData(date = datetime.today(), userId = current_user.id, hr = random.randint(40, 50), spo2 = random.randint(90, 97), bp = random.randint(110,140), cal = random.randint(2,3), mode = 1)
                 db.session.add(dat)
                 db.session.commit()
         if content['action']=="Exercise":
             for i in range(10):
                 print("Vroom")
-                dat = hData(date = datetime.today(), userId = 2, hr = random.randint(120, 150), spo2 = random.randint(95, 100), bp = random.randint(130,170), cal = random.randint(10,20), mode = 2)
+                dat = hData(date = datetime.today(), userId = current_user.id, hr = random.randint(120, 150), spo2 = random.randint(95, 100), bp = random.randint(130,170), cal = random.randint(10,20), mode = 2)
                 db.session.add(dat)
                 db.session.commit()
         return dashboard()
@@ -106,19 +107,19 @@ def signup():
         # flash("Account Created!", category="success")
         # return login()
     else:
-        return render_template("signup.html", user=current_user)
+        return render_template("signup.html")
 
 
 @auth.route("/welcome")
 @login_required
 def welcome():
-    return render_template("welcome.html")
+    return render_template("welcome.html", user=current_user)
 
 
 @auth.route("/metrics")
 @login_required
 def metrics():
-    return render_template("metrics.html")
+    return render_template("metrics.html", user=current_user)
 
 
 @auth.route("/dashboard")
@@ -142,4 +143,4 @@ def dashboard():
         for i in range(10):
             dataset[measure].append({"x": x[i], "y": y[i]})
 
-    return render_template("dashboard.html", data=dataset)
+    return render_template("dashboard.html", data=dataset, user=current_user)
