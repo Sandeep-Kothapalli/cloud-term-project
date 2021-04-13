@@ -1,12 +1,17 @@
 from . import db
-from sqlalchemy.dialects.postgresql import JSON
+from flask_login import UserMixin
+from sqlalchemy.sql import func
 
 
 class hData(db.Model):
-    __tablename__ = 'healthData'
+    __tablename__ = "healthData"
 
-    date = db.Column(db.DateTime(timezone=True), default=func.now(), primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey('usert.id')) ##take care while defining user database
+    date = db.Column(
+        db.DateTime(timezone=True), default=func.now(), primary_key=True
+    )
+    userId = db.Column(
+        db.Integer, db.ForeignKey("usert.id")
+    )  ##take care while defining user database
     hr = db.Column(db.Integer)
     spo2 = db.Column(db.Integer)
     bp = db.Column(db.Integer)
@@ -19,10 +24,18 @@ class hData(db.Model):
         self.spo2 = spo2
         self.bp = bp
         self.cal = cal
-    
 
     def __repr__(self):
         pass
-        
 
-#add user class for user database
+
+# add user class for user database
+
+
+class User(db.Model, UserMixin):
+    __tablename__ = "usert"
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(150), unique=True)
+    password = db.Column(db.String(150))
+    first_name = db.Column(db.String(150))
+    health_data = db.relationship("hData")
