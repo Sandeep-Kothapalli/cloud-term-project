@@ -141,19 +141,26 @@ def metrics():
             mode = x.mode
         if i>9:
             break
-    if mode==1:
-        printstr = "Sleep Mode"
-    else:
-        printstr = "Excercise Mode"
     hrv = 0
     for i in range(8):
         hrv+=(hb[i+1]-hb[i])*(hb[i+1]-hb[i])
     hrv=hrv/8
     hrv = math.sqrt(hrv)
+
+    if mode==1:
+        printstr = "Sleep Mode"
+        printstr1 = 'Variance of Heart Rate: '+str(hrv)
+        printstr2 = ''
+    else:
+        printstr = "Excercise Mode"
+        printstr1 = ''
+        printstr2 = 'Calories Burnt in an hour of Excercise: '+str(60*sum(cal)/len(cal))
+
     return render_template("metrics.html", user=current_user, printstr = printstr, hrv = hrv, max_hb = max(hb), min_hb = min(hb), avg_hb = sum(hb)/len(hb),
-        max_bp = max(bp), min_bp = min(bp), avg_bp = sum(bp)/len(bp), max_sp = max(sp), min_sp = min(sp), avg_sp = sum(sp)/len(sp),
-        max_cal = max(cal), min_cal = min(cal), avg_cal = sum(cal)/len(cal)
+        max_bp = max(bp), min_bp = min(bp), avg_bp = sum(bp)/len(bp), max_sp = max(sp), min_sp = min(sp), avg_sp = sum(sp)/len(sp), 
+        max_cal = max(cal), min_cal = min(cal), avg_cal = sum(cal)/len(cal), printstr1 = printstr1, printstr2 = printstr2
     )
+    
 
 
 @auth.route("/dashboard")
